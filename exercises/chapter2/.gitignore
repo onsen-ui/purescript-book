@@ -1,6 +1,9 @@
-.psci
-.psci_modules
-output
-bower_components
-.psc-ide-port
-.pulp-cache
+/bower_components/
+/node_modules/
+/.pulp-cache/
+/output/
+/generated-docs/
+/.psc-package/
+/.psc*
+/.purs*
+/.psa*
