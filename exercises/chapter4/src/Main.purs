@@ -5,7 +5,7 @@ import Prelude
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, logShow)
 import Control.MonadZero (guard)
-import Data.Array (concat, filter, foldl, foldr, null, (..), (:))
+import Data.Array (concat, filter, foldl, foldr, null, (..))
 import Data.Array.Partial (tail, head)
 import Partial.Unsafe (unsafePartial)
 
