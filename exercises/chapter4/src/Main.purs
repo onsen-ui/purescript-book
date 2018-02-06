@@ -1,11 +1,13 @@
 module Main where
 
 import Prelude
-import Data.Array (null)
-import Data.Array.Partial (tail)
-import Partial.Unsafe (unsafePartial)
+
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, logShow)
+import Data.Array (null)
+import Data.Array.Partial (tail, head)
+import Data.Traversable (traverseDefault)
+import Partial.Unsafe (unsafePartial)
 
 fact :: Int -> Int
 fact 0 = 1
@@ -27,5 +29,14 @@ isEven 0 = true
 isEven 1 = false
 isEven n = isEven (n - 2)
 
+countEven :: Array Int -> Int
+countEven arr =
+  if null arr
+    then 0
+    else if isEven(unsafePartial head arr)
+      then 1 + countEven(unsafePartial tail arr)
+      else countEven(unsafePartial tail arr)
+
 main :: Eff (console :: CONSOLE) Unit
 main = logShow "Hello"
+
