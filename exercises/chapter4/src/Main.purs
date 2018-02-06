@@ -5,7 +5,7 @@ import Prelude
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, logShow)
 import Control.MonadZero (guard)
-import Data.Array (null, filter, (..))
+import Data.Array (concat, filter, null, (..))
 import Data.Array.Partial (tail, head)
 import Partial.Unsafe (unsafePartial)
 
@@ -70,6 +70,23 @@ pythagoreanTriple n = do
   c <- b .. n
   guard $ a * a + b * b == c * c
   pure [a, b, c]
+
+factorizations :: Int -> Array Int
+factorizations 1 = []
+factorizations n = concat [[p], factorizations $ n / p]
+  where
+    p :: Int
+    p = firstFactor n
+
+firstFactor :: Int -> Int
+firstFactor = unsafePartial head <<< factors'
+  where
+    factors' :: Int -> Array Int
+    factors' n = do
+      m <- (1 .. n)
+      guard $ isPrime m
+      guard $ mod n m == 0
+      pure m
 
 main :: Eff (console :: CONSOLE) Unit
 main = logShow "Hello"
