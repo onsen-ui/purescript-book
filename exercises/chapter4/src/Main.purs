@@ -95,7 +95,11 @@ reverse' :: forall a. Array a -> Array a
 reverse' = foldl (\xs x -> [x] <> xs) []
 
 all :: Array Boolean -> Boolean
-all = foldl (\a b -> a && b) true
+all = foldl (&&) true
+
+-- f [false] is true
+f :: Array Boolean -> Boolean
+f = foldl (==) false
 
 main :: Eff (console :: CONSOLE) Unit
 main = logShow "Hello"
