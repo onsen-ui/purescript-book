@@ -5,9 +5,8 @@ import Prelude
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, logShow)
 import Control.MonadZero (guard)
-import Data.Array (null, filter, (..), range)
+import Data.Array (null, filter, (..))
 import Data.Array.Partial (tail, head)
-import Data.Foldable (product)
 import Partial.Unsafe (unsafePartial)
 
 fact :: Int -> Int
@@ -57,6 +56,20 @@ isPrime :: Int -> Boolean
 isPrime 0 = false
 isPrime 1 = false
 isPrime n = (length <<< factors) n == 1
+
+cartesianProduct :: forall a. Array a -> Array a -> Array (Array a)
+cartesianProduct xs ys = do
+  x <- xs
+  y <- ys
+  pure [x, y]
+
+pythagoreanTriple :: Int -> Array (Array Int)
+pythagoreanTriple n = do
+  a <- 3 .. n
+  b <- a .. n
+  c <- b .. n
+  guard $ a * a + b * b == c * c
+  pure [a, b, c]
 
 main :: Eff (console :: CONSOLE) Unit
 main = logShow "Hello"
