@@ -5,7 +5,7 @@ import Prelude
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, logShow)
 import Control.MonadZero (guard)
-import Data.Array (concat, filter, null, (..))
+import Data.Array (concat, filter, foldl, foldr, null, (..), (:))
 import Data.Array.Partial (tail, head)
 import Partial.Unsafe (unsafePartial)
 
@@ -87,6 +87,12 @@ firstFactor = unsafePartial head <<< factors'
       guard $ isPrime m
       guard $ mod n m == 0
       pure m
+
+reverse :: forall a. Array a -> Array a
+reverse = foldr (\x xs -> xs <> [x]) []
+
+reverse' :: forall a. Array a -> Array a
+reverse' = foldl (\xs x -> [x] <> xs) []
 
 main :: Eff (console :: CONSOLE) Unit
 main = logShow "Hello"
