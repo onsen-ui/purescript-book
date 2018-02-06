@@ -22,5 +22,10 @@ length arr =
     then 0
     else 1 + length(unsafePartial tail arr)
 
+isEven :: Int -> Boolean
+isEven 0 = true
+isEven 1 = false
+isEven n = isEven (n - 2)
+
 main :: Eff (console :: CONSOLE) Unit
 main = logShow "Hello"
