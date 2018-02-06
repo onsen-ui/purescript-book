@@ -4,9 +4,9 @@ import Prelude
 
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, logShow)
-import Data.Array (null, filter)
+import Data.Array (null, filter, concatMap, (..))
 import Data.Array.Partial (tail, head)
-import Math (abs)
+import Data.Foldable (product)
 import Partial.Unsafe (unsafePartial)
 
 fact :: Int -> Int
@@ -45,6 +45,14 @@ infix 5 filter as <$?>
 removeNegatives :: Array Number -> Array Number
 removeNegatives xs = (\n -> n >= 0.0) <$?> xs
 
+pairs :: Int -> Array (Array Int)
+pairs n =
+  concatMap (\i ->
+    map (\j -> [i, j]) (i .. n)
+  ) (1 .. n)
+
+factors :: Int -> Array (Array Int)
+factors n = filter (\pair -> product pair == n) (pairs n)
+
 main :: Eff (console :: CONSOLE) Unit
 main = logShow "Hello"
-
