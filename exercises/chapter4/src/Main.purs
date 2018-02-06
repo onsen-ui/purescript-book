@@ -94,5 +94,8 @@ reverse = foldr (\x xs -> xs <> [x]) []
 reverse' :: forall a. Array a -> Array a
 reverse' = foldl (\xs x -> [x] <> xs) []
 
+all :: Array Boolean -> Boolean
+all = foldl (\a b -> a && b) true
+
 main :: Eff (console :: CONSOLE) Unit
 main = logShow "Hello"
