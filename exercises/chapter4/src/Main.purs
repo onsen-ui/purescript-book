@@ -37,6 +37,9 @@ countEven arr =
       then 1 + countEven(unsafePartial tail arr)
       else countEven(unsafePartial tail arr)
 
+square :: Array Number -> Array Number
+square xs = (\n -> n * n) <$> xs
+
 main :: Eff (console :: CONSOLE) Unit
 main = logShow "Hello"
 
