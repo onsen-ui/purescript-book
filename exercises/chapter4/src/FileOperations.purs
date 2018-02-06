@@ -2,7 +2,6 @@ module FileOperations where
 
 import Prelude
 
-import Control.MonadZero (guard)
 import Data.Array (concatMap, filter, foldr, null, (:))
 import Data.Array.Partial (head)
 import Data.Maybe (Maybe(..))
