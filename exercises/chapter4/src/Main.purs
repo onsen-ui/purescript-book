@@ -4,9 +4,8 @@ import Prelude
 
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, logShow)
-import Data.Array (null)
+import Data.Array (null, filter)
 import Data.Array.Partial (tail, head)
-import Data.Traversable (traverseDefault)
 import Partial.Unsafe (unsafePartial)
 
 fact :: Int -> Int
@@ -40,6 +39,8 @@ countEven arr =
 square :: Array Number -> Array Number
 square xs = (\n -> n * n) <$> xs
 
+removeNegatives :: Array Number -> Array Number
+removeNegatives = filter (\n -> n >= 0.0)
+
 main :: Eff (console :: CONSOLE) Unit
 main = logShow "Hello"
-
