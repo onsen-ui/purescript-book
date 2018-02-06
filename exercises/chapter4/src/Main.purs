@@ -91,15 +91,21 @@ firstFactor = unsafePartial head <<< factors'
 reverse :: forall a. Array a -> Array a
 reverse = foldr (\x xs -> xs <> [x]) []
 
-reverse' :: forall a. Array a -> Array a
-reverse' = foldl (\xs x -> [x] <> xs) []
-
 all :: Array Boolean -> Boolean
 all = foldl (&&) true
 
 -- f [false] is true
 f :: Array Boolean -> Boolean
 f = foldl (==) false
+
+reverse' :: forall a. Array a -> Array a
+reverse' = foldl (\xs x -> [x] <> xs) []
+
+count :: forall a. (a -> Boolean) -> Array a -> Int -> Int
+count _ [] acc = acc
+count p xs acc = if p (unsafePartial head xs)
+                  then count p (unsafePartial tail xs) (acc + 1)
+                  else count p (unsafePartial tail xs) acc
 
 main :: Eff (console :: CONSOLE) Unit
 main = logShow "Hello"
