@@ -53,5 +53,10 @@ factors n = do
   guard $ i * j == n
   pure [i, j]
 
+isPrime :: Int -> Boolean
+isPrime 0 = false
+isPrime 1 = false
+isPrime n = (length <<< factors) n == 1
+
 main :: Eff (console :: CONSOLE) Unit
 main = logShow "Hello"
