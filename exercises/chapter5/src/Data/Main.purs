@@ -28,3 +28,28 @@ binomial n 0 = 1
 binomial n k | n < k     = 0
              | k < 0     = 0
              | otherwise = binomial (n - 1) (k - 1) + binomial (n - 1) k
+
+isEmpty :: forall a. Array a -> Boolean
+isEmpty [] = true
+isEmpty _  = false
+
+takeFive :: Array Int -> Int
+takeFive [0, 1, a, b, _] = a * b
+takeFive _ = 0
+
+showPerson :: { first :: String, last :: String } -> String
+showPerson { first: x, last: y } = y <> ", " <> x
+
+type Address = { street :: String, city :: String }
+
+type Person = { name :: String, address :: Address }
+
+livesInLA :: Person -> Boolean
+livesInLA { address: { city: "Los Angeles" } } = true
+livesInLA _ = false
+
+sortPair :: Array Int -> Array Int
+sortPair arr@[x, y]
+  | x <= y = arr
+  | otherwise = [y, x]
+sortPair arr = arr
