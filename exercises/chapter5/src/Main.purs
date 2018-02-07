@@ -1,10 +1,12 @@
 module Main where
 
 import Prelude
-import Data.Foldable (sum)
-import Partial.Unsafe (unsafePartial)
+
 import Data.Array.Partial (tail)
+import Data.Foldable (sum)
+import Data.Maybe (Maybe(..))
 import Data.Picture (Point(..), Shape(..))
+import Partial.Unsafe (unsafePartial)
 
 gcd' :: Int -> Int -> Int
 gcd' n 0 = n
@@ -83,3 +85,7 @@ double :: Shape -> Shape
 double (Rectangle _ w h) = Rectangle origin (w * 2.0) (h * 2.0)
 double (Circle _ r)      = Circle origin (r * 2.0)
 double s                 = s
+
+getText :: Shape -> Maybe String
+getText (Text _ str) = Just str
+getText _            = Nothing
