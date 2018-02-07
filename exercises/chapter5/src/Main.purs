@@ -4,6 +4,7 @@ import Prelude
 import Data.Foldable (sum)
 import Partial.Unsafe (unsafePartial)
 import Data.Array.Partial (tail)
+import Data.Picture
 
 gcd' :: Int -> Int -> Int
 gcd' n 0 = n
@@ -71,3 +72,14 @@ lzs [] = []
 lzs xs = case sum xs of
   0 -> xs
   _ -> lzs (unsafePartial tail xs)
+
+origin :: Point
+origin = Point { x : 0.0, y: 0.0 }
+
+tenRadiusCircle :: Shape
+tenRadiusCircle = Circle origin 10.0
+
+double :: Shape -> Shape
+double (Rectangle _ w h) = Rectangle origin (w * 2.0) (h * 2.0)
+double (Circle _ r)      = Circle origin (r * 2.0)
+double s                 = s
