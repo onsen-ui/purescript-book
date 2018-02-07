@@ -114,3 +114,8 @@ bounds = foldl combine emptyBounds
   where
   combine :: Bounds -> Shape -> Bounds
   combine b shape = union (shapeBounds shape) b
+
+area :: Shape -> Number
+area (Rectangle _ w h) = w * h
+area (Circle _ r)      = Math.pi * r * r
+area _                 = 0.0
