@@ -4,7 +4,7 @@ import Prelude
 import Data.Foldable (sum)
 import Partial.Unsafe (unsafePartial)
 import Data.Array.Partial (tail)
-import Data.Picture
+import Data.Picture (Point(..), Shape(..))
 
 gcd' :: Int -> Int -> Int
 gcd' n 0 = n
