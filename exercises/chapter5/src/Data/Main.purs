@@ -1,6 +1,9 @@
 module Main where
 
 import Prelude
+import Data.Foldable (sum)
+import Partial.Unsafe (unsafePartial)
+import Data.Array.Partial (tail)
 
 gcd' :: Int -> Int -> Int
 gcd' n 0 = n
@@ -62,3 +65,9 @@ sameCity a b = a.address.city == b.address.city
 fromSingleton :: forall a. a -> Array a -> a
 fromSingleton default [x] = x
 fromSingleton default _   = default
+
+lzs :: Array Int -> Array Int
+lzs [] = []
+lzs xs = case sum xs of
+  0 -> xs
+  _ -> lzs (unsafePartial tail xs)
