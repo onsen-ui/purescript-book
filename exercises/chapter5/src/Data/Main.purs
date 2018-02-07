@@ -22,3 +22,9 @@ factorial = factorial' 1
     factorial' :: Int -> Int -> Int
     factorial' acc 0 = acc
     factorial' acc n = factorial' (acc * n) (n - 1)
+
+binomial :: Int -> Int -> Int
+binomial n 0 = 1
+binomial n k | n < k     = 0
+             | k < 0     = 0
+             | otherwise = binomial (n - 1) (k - 1) + binomial (n - 1) k
