@@ -5,9 +5,8 @@ import Prelude
 gcd' :: Int -> Int -> Int
 gcd' n 0 = n
 gcd' 0 m = m
-gcd' n m = if n > m
-  then gcd' (n - m) m
-  else gcd' n (m - n)
+gcd' n m | n > m     = gcd' (n - m) m
+         | otherwise = gcd' n (m - n)
 
 fromString :: String -> Boolean
 fromString "true" = true
@@ -16,3 +15,10 @@ fromString _      = false
 toString :: Boolean -> String
 toString true = "true"
 toString false = "false"
+
+factorial :: Int -> Int
+factorial = factorial' 1
+  where
+    factorial' :: Int -> Int -> Int
+    factorial' acc 0 = acc
+    factorial' acc n = factorial' (acc * n) (n - 1)
