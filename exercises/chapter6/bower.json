@@ -18,7 +18,9 @@
     "purescript-either": "^3.0.0",
     "purescript-strings": "^3.0.0",
     "purescript-console": "^3.0.0",
-    "purescript-functions": "^3.0.0"
+    "purescript-functions": "^3.0.0",
+    "purescript-foldable-traversable": "^3.7.1",
+    "purescript-monoid": "^3.3.0"
   },
   "devDependencies": {
     "purescript-psci-support": "^3.0.0"
