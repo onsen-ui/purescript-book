@@ -37,14 +37,16 @@ takeFive :: Array Int -> Int
 takeFive [0, 1, a, b, _] = a * b
 takeFive _ = 0
 
-showPerson :: { first :: String, last :: String } -> String
+showPerson :: forall r. { first :: String, last :: String | r } -> String
 showPerson { first: x, last: y } = y <> ", " <> x
 
 type Address = { street :: String, city :: String }
 
 type Person = { name :: String, address :: Address }
 
-livesInLA :: Person -> Boolean
+type HasCity r s = { address :: { city :: String | r } | s }
+
+livesInLA :: forall r s. HasCity r s -> Boolean
 livesInLA { address: { city: "Los Angeles" } } = true
 livesInLA _ = false
 
@@ -53,3 +55,10 @@ sortPair arr@[x, y]
   | x <= y = arr
   | otherwise = [y, x]
 sortPair arr = arr
+
+sameCity :: forall r s t u. HasCity r s -> HasCity t u -> Boolean
+sameCity a b = a.address.city == b.address.city
+
+fromSingleton :: forall a. a -> Array a -> a
+fromSingleton default [x] = x
+fromSingleton default _   = default
