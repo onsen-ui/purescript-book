@@ -2,7 +2,8 @@ module NonEmptyArray where
 
 import Prelude
 
-import Data.Array ((:))
+import Data.Array (foldMap, foldl, foldr, (:))
+import Data.Foldable (class Foldable)
 
 data NonEmpty a = NonEmpty a (Array a)
 
@@ -17,3 +18,8 @@ instance semigroupNonEmpty :: Semigroup (NonEmpty a) where
 
 instance functorNonEmpty :: Functor NonEmpty where
   map f (NonEmpty x xs) = NonEmpty (f x) (f <$> xs)
+
+instance foldableNonEmpty :: Foldable NonEmpty where
+  foldl f acc (NonEmpty x xs) = foldl f acc ([x] <> xs)
+  foldr f acc (NonEmpty x xs) = foldr f acc ([x] <> xs)
+  foldMap f (NonEmpty x xs) = foldMap f ([x] <> xs)
